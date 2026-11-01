@@ -339,13 +339,13 @@ The tool generates 29 PNGs, 29 SVGs and twelve GIFs from actual frames. The Glyp
 
 **Procedural 3D wireframe scene.** A large striped sun rises and falls over layered blue mountain lattices. World-space vertices use perspective projection and a moving camera; printable ASCII glyphs draw the scene on a uniform dark background. The sun and camera repeat every 9.6 seconds. PNG, SVG, and GIF previews are generated from the same runnable example.
 
-![Vaporwave sunset, wireframe mountains and perspective grid](images/vaporwave.png)
+![Vaporwave sunset, wireframe mountains and perspective grid](images/vaporwave-ascii.png)
 
 ```sh
 python -m examples.vaporwave
 python -m examples.vaporwave --output output/vaporwave.html
 ```
 
-![Animated vaporwave 3D scene](images/vaporwave.gif)
+![Animated vaporwave 3D scene](images/vaporwave-ascii.gif)
 
-[Source](../examples/vaporwave.py) · [SVG preview](images/vaporwave.svg)
+[Source](../examples/vaporwave.py) · [SVG preview](images/vaporwave-ascii.svg)

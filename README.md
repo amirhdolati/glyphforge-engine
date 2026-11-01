@@ -167,7 +167,7 @@ The original City Watch GIF above comes directly from the Glyph City repository 
 
 A large striped sun rises and falls above blue wireframe mountains, stars, and a magenta perspective grid. A gently moving 3D camera and colored ASCII characters give this vaporwave landscape its depth and smooth gradients.
 
-![Animated vaporwave horizon](docs/images/vaporwave.gif)
+![Animated vaporwave horizon](docs/images/vaporwave-ascii.gif)
 
 ```sh
 python -m examples.vaporwave

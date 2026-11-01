@@ -38,8 +38,12 @@ def main():
             if name == "vaporwave"
             else module.frame(100, 36, 1)
         )
-        save_frame(frame, OUT / (name + ".svg"))
-        raster(frame).save(OUT / (name + ".png"))
+        save_frame(
+            frame, OUT / (("vaporwave-ascii" if name == "vaporwave" else name) + ".svg")
+        )
+        raster(frame).save(
+            OUT / (("vaporwave-ascii" if name == "vaporwave" else name) + ".png")
+        )
         print(name)
     for name in (
         "rotating_cube",
@@ -74,7 +78,7 @@ def main():
             else [raster(module.frame(64, 24, index * 0.15)) for index in range(count)]
         )
         frames[0].save(
-            OUT / (name + ".gif"),
+            OUT / (("vaporwave-ascii" if name == "vaporwave" else name) + ".gif"),
             save_all=True,
             append_images=frames[1:],
             duration=100,
