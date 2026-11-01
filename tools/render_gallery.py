@@ -36,9 +36,16 @@ def main():
         "lava_lamp",
         "starflight",
         "torus_sculpture",
+        "orbit_camera",
+        "dolly_camera",
     ):
         module = importlib.import_module("examples." + name)
-        frames = [raster(module.frame(64, 24, index * 0.15)) for index in range(40)]
+        count = 64 if name in ("orbit_camera", "dolly_camera") else 40
+        frames = (
+            [raster(module.frame(80, 30, index * 0.15)) for index in range(count)]
+            if count == 64
+            else [raster(module.frame(64, 24, index * 0.15)) for index in range(count)]
+        )
         frames[0].save(
             OUT / (name + ".gif"),
             save_all=True,

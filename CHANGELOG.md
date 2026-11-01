@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Standalone engine introduction and focused rendering documentation.
+- World-to-view `look_at` helper with validated camera poses.
+- Stationary robot orbit and pillar dolly demos, animated previews, and camera tutorial.
+
 - Twelve creative demos spanning procedural cells, particles, grid scenes and meshes.
 - Expanded gallery with 18 still previews and five animations.
 - Glyph City showcase using its original upstream City Watch GIF.

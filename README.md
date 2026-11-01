@@ -12,7 +12,7 @@ A pure-Python terminal rendering library for colored ASCII scenes, triangle mesh
 
 </div>
 
-GlyphForge extracts the rendering core of **Glyph City: Afterlight** into an independent library. It includes the game's atmospheric grid ray caster and a separately namespaced, MIT-licensed **RendASCII-derived** triangle pipeline. No game saves, NPC simulation, quests, audio, or city generator are required.
+GlyphForge is a terminal rendering engine for 3D objects, atmospheric scenes, and character graphics. Create triangle meshes, position a camera in 3D space, and render perspective views directly to colored terminal cells. Use the same frame format for live animation and portable image exports.
 
 **Python 3.10+ · No runtime dependencies · MIT · Alpha API**
 
@@ -46,6 +46,40 @@ python -m pip install "git+https://github.com/amirhdolati/glyphforge-engine.git"
 ```
 
 This repository does not imply a PyPI release. The distribution is named `glyphforge-engine`; the Python import is `glyphforge`.
+
+## Real 3D objects and moving cameras
+
+Create a mesh in world coordinates and move the camera around it. GlyphForge projects its triangles, resolves depth, and draws the visible surfaces as terminal characters. These demos keep the geometry stationary: the changing view comes from the camera itself.
+
+### Orbit a 3D sculpture
+
+![Moving camera orbiting a stationary robot sculpture](docs/images/orbit_camera.gif)
+
+```sh
+python -m examples.orbit_camera
+```
+
+The camera circles a robot made of solid boxes, revealing its front, sides, back, and top. Different face glyphs make the shape readable as perspective and occlusion change.
+
+### Dolly and parallax
+
+![Camera movement across a fixed scene of pillars](docs/images/dolly_camera.gif)
+
+```sh
+python -m examples.dolly_camera
+```
+
+The camera moves sideways and forward through a view of pillars and a tiled floor. Nearby objects shift more than distant objects, and surfaces hide one another according to depth.
+
+```python
+from glyphforge.mesh import look_at
+
+# World-space camera position and the point it looks toward.
+camera.set_transformation(look_at(eye=(4, 2, -6), target=(0, 0, 0)))
+frame = engine.render_cells(camera)
+```
+
+[Moving-camera tutorial and coordinate conventions](docs/cameras.md) · [Orbit source](examples/orbit_camera.py) · [Dolly source](examples/dolly_camera.py)
 
 ## Your first scene
 
@@ -115,21 +149,21 @@ python -m examples.obj_model
 python -m examples.hello_terminal
 ```
 
-All 18 demos accept `--output`, `--width`, `--height`, `--time`, `--fps`, and `--256`. See the [example guide](examples/README.md).
+All 20 demos accept `--output`, `--width`, `--height`, `--time`, `--fps`, and `--256`. See the [example guide](examples/README.md).
 
 ## Project showcase: Glyph City
 
-[**Glyph City: Afterlight**](https://github.com/amirhdolati/glyph-city) is the flagship project behind this engine: a living terminal city with autonomous residents, furnished shop windows, changing weather, canal reflections, and an optional first-person walking mode.
+[**Glyph City: Afterlight**](https://github.com/amirhdolati/glyph-city) is a featured terminal graphics project: a living terminal city with autonomous residents, furnished shop windows, changing weather, canal reflections, and an optional first-person walking mode.
 
 [![Glyph City — original City Watch GIF](https://raw.githubusercontent.com/amirhdolati/glyph-city/master/docs/media/city-watch.gif)](https://github.com/amirhdolati/glyph-city)
 
-This is the **original GIF from the Glyph City repository**, showing the canal and nighttime rain. GlyphForge extracts its rendering core into a standalone library; the existing game retains its own integrated renderer. This showcase demonstrates the source project's capabilities, not a claim that it has already migrated to the published package.
+The original City Watch GIF above comes directly from the Glyph City repository and shows its canal scene and nighttime rain.
 
 [Explore Glyph City](https://github.com/amirhdolati/glyph-city) · [Original GIF](https://github.com/amirhdolati/glyph-city/blob/master/docs/media/city-watch.gif)
 
 ## Twelve more creative directions
 
-The gallery now has **18 runnable examples**. Explore procedural light, mathematical art, instruments, particles, new environments, and animated mesh sculptures.
+The gallery now has **20 runnable examples**. Explore procedural light, mathematical art, instruments, particles, new environments, and animated mesh sculptures.
 
 | Aurora curtains | Neon wormhole |
 | --- | --- |
@@ -179,13 +213,13 @@ Tests cover depth occlusion, rectangular maps, scene validation, custom sprites,
 
 ## Scope and limitations
 
-This is an initial extraction with an **alpha API**. The ray caster retains the original urban material style; it is not a general shader system. Its view distance is 78 world units, sprites are culled at 48 units, and a camera should remain outside solid footprints. There is no physics or collision system. Use printable single-column ASCII, not wide Unicode or emoji. Full terminal frames are the default; delta output assumes exclusive screen ownership and requires invalidation after external writes. Native Windows interactive input is not implemented; use WSL.
+GlyphForge currently has an **alpha API**. The ray caster provides procedural urban materials; it is not a general shader system. Its view distance is 78 world units, sprites are culled at 48 units, and a camera should remain outside solid footprints. There is no physics or collision system. Use printable single-column ASCII, not wide Unicode or emoji. Full terminal frames are the default; delta output assumes exclusive screen ownership and requires invalidation after external writes. Native Windows interactive input is not implemented; use WSL.
 
 The inherited OBJ loader expects triangulated faces and a material library with `Kd` colors covered by the colormap. It does not implement arbitrary OBJ features. See [API contracts](docs/api.md) before importing assets.
 
 ## Attribution
 
-The ray caster, procedural materials, window interiors, ANSI encoder, and terminal input/lifecycle were extracted and adapted from Glyph City. The mesh backend derives from RendASCII by **Garrett Russell Fairburn**, copyright 2018–2020, under the MIT license. Its original license is preserved in the package. See [third-party notices](THIRD_PARTY_NOTICES.md) and [extraction notes](docs/architecture.md).
+The triangle backend includes MIT-licensed RendASCII code by **Garrett Russell Fairburn**, copyright 2018–2020. Its original copyright and license are preserved in the package. See [third-party notices](THIRD_PARTY_NOTICES.md).
 
 ## Support
 
