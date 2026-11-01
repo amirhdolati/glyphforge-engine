@@ -4,6 +4,8 @@
 
 **Build worlds out of characters.**
 
+[![CI](https://github.com/amirhdolati/glyphforge-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/amirhdolati/glyphforge-engine/actions/workflows/ci.yml)
+
 A pure-Python terminal rendering library for colored ASCII scenes, triangle meshes, and custom character graphics.
 
 [Getting started](docs/getting-started.md) · [API guide](docs/api.md) · [Examples](examples/README.md) · [Creative gallery](docs/gallery.md) · [Architecture](docs/architecture.md) · [Donate](#support)
@@ -228,7 +230,7 @@ Spacecraft, architecture, orbital motion, crystal forms and kinetic sculpture—
 ```sh
 python -m pip install -e .
 python -m unittest discover -s tests -v
-python -m pip install build ruff Pillow
+python -m pip install -e ".[dev]"
 ruff check src examples tests tools --select F
 ruff format --check src examples tests tools
 python -m build

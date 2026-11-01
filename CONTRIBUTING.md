@@ -5,7 +5,7 @@ Use Python 3.10 or newer. Keep the core free of runtime dependencies, keep user-
 ```sh
 python -m venv .venv
 source .venv/bin/activate
-python -m pip install -e . build ruff Pillow
+python -m pip install -e ".[dev]"
 python -m unittest discover -s tests -v
 ruff check src examples tests tools --select F
 ruff format --check src examples tests tools

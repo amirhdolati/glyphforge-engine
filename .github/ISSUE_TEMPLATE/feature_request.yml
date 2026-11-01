@@ -1,0 +1,15 @@
+name: Feature request
+description: Suggest an improvement or example
+body:
+  - type: textarea
+    id: use_case
+    attributes:
+      label: What would you like to do?
+      description: Describe the use case and what is currently missing.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior or example
+      description: A small sketch or sample command is welcome.
