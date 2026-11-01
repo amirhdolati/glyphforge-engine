@@ -62,7 +62,7 @@ def segment(buf, a, b, color, char=None):
             if (x1 - x0) * (y1 - y0) < 0
             else "\\"
         )
-        plot(buf, x, y, glyph, color)
+        plot(buf, x, y, glyph, color, mix(color, (9, 8, 32), 0.35))
 
 
 def fill_polygon(buf, points, color, seed=0):
@@ -89,14 +89,14 @@ def fill_polygon(buf, points, color, seed=0):
                 )
 
 
-def mountain(center_z, width, seed, phase, scale, offset_x=0.0, count=39):
+def mountain(center_z, width, seed, phase, scale, offset_x=0.0, count=17):
     """Generate two ridgeline rows with a craggy, triangulated profile."""
     rows = []
     for row, z in enumerate((center_z, center_z + 4.0)):
         vertices = []
         for i in range(count):
             x = offset_x - width / 2 + width * i / (count - 1)
-            envelope = max(0.0, 1.0 - abs(x) / (width * 0.56))
+            envelope = max(0.0, 1.0 - abs(x - offset_x) / (width * 0.56))
             crag = (
                 0.36
                 + abs(math.sin((i + seed) * 1.11)) * 0.82
@@ -125,7 +125,9 @@ def draw_ridge(buf, view, width, height, fov, geometry, fill, wire, seed):
         if i % 2 == 0:
             segment(buf, front2[i + 1], back2[i], mix(wire, (80, 70, 210), 0.24), "\\")
     for i in range(len(front)):
-        segment(buf, front2[i], back2[i], wire, "|")
+        segment(buf, front2[i], floor2[i], mix(wire, (24, 35, 100), 0.35))
+        if i + 1 < len(front):
+            segment(buf, front2[i], floor2[i + 1], mix(wire, (24, 35, 100), 0.4))
     for i in range(1, len(front) - 1):
         if front[i][1] > front[i - 1][1] and front[i][1] >= front[i + 1][1]:
             plot(buf, front2[i][0], front2[i][1], "^", mix(wire, (220, 220, 255), 0.35))
@@ -161,12 +163,12 @@ def draw_grid(buf, view, width, height, fov, near, far, foreground=False):
         segment(buf, a, b, color, "=" if index % 2 == 0 else "-")
 
 
-def frame(width, height, seconds):
+def render_scene(width, height, seconds):
     if width < 1 or height < 1:
         raise ValueError("Frame size must be positive")
     width, height = int(width), int(height)
     fov = math.radians(52)
-    eye = (0.85 * math.sin(seconds * 0.654), 2.25, -8.0)
+    eye = (0.3 * math.sin(seconds * math.tau / 9.6), 2.25, -8.0)
     target = (0.0, 1.9, 8.0)
     view = look_at(eye, target)
 
@@ -184,12 +186,12 @@ def frame(width, height, seconds):
             row.append((" ", sky, sky))
         buf.append(row)
 
-    for i in range(max(34, width * height // 24)):
+    for i in range(max(34, width * height // 180)):
         x = (i * 7919 + 17) % width
         y = (i * 3571 + 5) % max(1, int(height * 0.55))
-        twinkle = 0.48 + 0.52 * math.sin(seconds * 1.6 + i * 2.17)
+        twinkle = 0.48 + 0.52 * math.sin(seconds * math.tau / 9.6 + i * 2.17)
         color = mix((92, 94, 173), (245, 218, 255), twinkle)
-        plot(buf, x, y, "+" if i % 11 == 0 else ".", color)
+        plot(buf, x, y, ".", color, mix(color, buf[y][x][2], 0.45))
 
     # Subtle distant grid and horizon glow sit behind both mountain ridges.
     draw_grid(buf, view, width, height, fov, 9.5, 58, foreground=False)
@@ -200,10 +202,20 @@ def frame(width, height, seconds):
         plot(buf, x, hy, "=" if x % 8 else "+", mix((115, 38, 172), PINK, 0.38))
 
     # A broad sunset disk, with warm gradients, a halo, and broken synth scanlines.
-    center = project((0, 4.2, 14.2), view, width, height, fov)
+    center = project(
+        (
+            0.35 * math.sin(seconds * math.tau / 9.6),
+            6.0 + 1.4 * math.sin(seconds * math.tau / 9.6),
+            14.2,
+        ),
+        view,
+        width,
+        height,
+        fov,
+    )
     if center:
         sx, sy, depth = center
-        radius_y = max(4.2, min(height * 0.22, width * 0.12) * 14 / depth)
+        radius_y = height * 0.19 * 22 / depth
         radius_x = radius_y * 1.85
         y0, y1 = (
             max(0, math.floor(sy - radius_y)),
@@ -221,9 +233,13 @@ def frame(width, height, seconds):
                 max(0, math.floor(sx - half)), min(width, math.ceil(sx + half))
             ):
                 dx = (x + 0.5 - sx) / radius_x
-                scanline = dy > 0.2 and dy < 0.9 and (y - round(sy)) % 2 == 0
+                scanline = dy > -0.05 and ((dy + 0.05) * 7) % 1 < (
+                    0.12 + max(0, dy) * 0.32
+                )
                 halo = max(0.0, 1.0 - math.hypot(dx, dy) / 1.8) * 0.32
-                bg = mix(sun, (92, 31, 121), 0.48) if scanline else sun
+                if scanline:
+                    continue
+                bg = sun
                 bg = mix(bg, (255, 225, 204), halo * 0.18)
                 plot(buf, x, y, " ", sun, bg)
 
@@ -246,6 +262,33 @@ def frame(width, height, seconds):
             glow = mix((255, 63, 229), (122, 89, 255), i / 5)
             plot(buf, width // 2, p[1], "+", glow)
     return buf
+
+
+def frame(width, height, seconds):
+    """Supersample the procedural 3D scene into RGB terminal backgrounds."""
+    scale = 3
+    source = render_scene(width * scale, height * scale, seconds)
+    return [
+        [
+            (
+                " ",
+                (255, 255, 255),
+                tuple(
+                    round(
+                        sum(
+                            source[y * scale + dy][x * scale + dx][2][c]
+                            for dy in range(scale)
+                            for dx in range(scale)
+                        )
+                        / scale**2
+                    )
+                    for c in range(3)
+                ),
+            )
+            for x in range(width)
+        ]
+        for y in range(height)
+    ]
 
 
 if __name__ == "__main__":
