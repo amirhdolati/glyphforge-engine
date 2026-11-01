@@ -54,7 +54,7 @@ def main():
         module = importlib.import_module("examples." + name)
         if name not in selected:
             continue
-        count = 64 if name in ("orbit_camera", "dolly_camera") else 40
+        count = 64 if name in ("orbit_camera", "dolly_camera", "vaporwave") else 40
         frames = (
             [raster(module.frame(80, 30, index * 0.15)) for index in range(count)]
             if count == 64
