@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Vaporwave 3D scene with striped sunset, wireframe mountains, stars and a perspective grid.
+
 - Eight additional 3D object and structure demos, bringing the collection to 28.
 - Eight new PNG/SVG previews and four additional animations.
 - Selective gallery regeneration with `tools/render_gallery.py --only`.
