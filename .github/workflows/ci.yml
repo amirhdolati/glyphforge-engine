@@ -4,9 +4,14 @@ on:
   pull_request:
 permissions:
   contents: read
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   test:
+    timeout-minutes: 15
     strategy:
+      fail-fast: false
       matrix:
         include:
           - {os: ubuntu-latest, python: '3.10'}
@@ -25,16 +30,25 @@ jobs:
       - run: python -m examples.night_rain --output output/night.html
       - run: python -m examples.rotating_cube --output output/cube.svg
   package:
+    timeout-minutes: 15
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.13'
-      - run: python -m pip install build ruff
+      - run: python -m pip install ".[dev]"
       - run: ruff check src examples tests tools --select F
       - run: ruff format --check src examples tests tools
       - run: python -m build
+      - run: python -m twine check dist/*
+      - name: Install and exercise the built wheel in isolation
+        shell: bash
+        run: |
+          python -m venv "$RUNNER_TEMP/wheel-check"
+          "$RUNNER_TEMP/wheel-check/bin/python" -m pip install --no-deps dist/*.whl
+          cd "$RUNNER_TEMP"
+          "$RUNNER_TEMP/wheel-check/bin/python" -I "$GITHUB_WORKSPACE/tools/check_wheel.py"
       - uses: actions/upload-artifact@v4
         with:
           name: distributions

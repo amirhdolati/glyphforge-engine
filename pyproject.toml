@@ -20,6 +20,9 @@ classifiers = [
 ]
 dependencies = []
 
+[project.optional-dependencies]
+dev = ["build>=1.2,<2", "ruff==0.17.3", "Pillow>=10,<14", "twine>=6,<7"]
+
 [project.urls]
 Homepage = "https://github.com/amirhdolati/glyphforge-engine"
 Repository = "https://github.com/amirhdolati/glyphforge-engine"
@@ -30,3 +33,9 @@ where = ["src"]
 
 [tool.setuptools.package-data]
 "glyphforge._vendor.rendascii" = ["LICENSE.txt"]
+
+[tool.ruff]
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["F"]
