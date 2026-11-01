@@ -1,0 +1,18 @@
+# Original demo asset authored for GlyphForge Engine.
+mtllib pyramid.mtl
+v -1 -1 -1
+v 1 -1 -1
+v 1 -1 1
+v -1 -1 1
+v 0 1 0
+usemtl jade
+f 1 5 2
+usemtl gold
+f 2 5 3
+usemtl violet
+f 3 5 4
+usemtl ice
+f 4 5 1
+usemtl jade
+f 1 2 3
+f 1 3 4

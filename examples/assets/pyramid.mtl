@@ -1,0 +1,8 @@
+newmtl jade
+Kd 0 1 0
+newmtl gold
+Kd 1 1 0
+newmtl violet
+Kd 1 0 1
+newmtl ice
+Kd 0 1 1

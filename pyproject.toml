@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "glyphforge-engine"
+version = "0.1.0"
+description = "A pure-Python terminal rendering engine for colored ASCII scenes and 3D meshes"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE", "THIRD_PARTY_NOTICES.md"]
+authors = [{name = "Amir H. Dolati"}]
+keywords = ["terminal", "ascii", "3d", "raycasting", "renderer"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Programming Language :: Python :: 3",
+  "Topic :: Multimedia :: Graphics :: 3D Rendering",
+  "Operating System :: POSIX",
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/amirhdolati/glyphforge-engine"
+Repository = "https://github.com/amirhdolati/glyphforge-engine"
+Issues = "https://github.com/amirhdolati/glyphforge-engine/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"glyphforge._vendor.rendascii" = ["LICENSE.txt"]
