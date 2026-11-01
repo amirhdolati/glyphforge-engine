@@ -6,7 +6,7 @@
 
 A pure-Python terminal rendering library for colored ASCII scenes, triangle meshes, and custom character graphics.
 
-[Getting started](docs/getting-started.md) · [API guide](docs/api.md) · [Examples](examples/README.md) · [Architecture](docs/architecture.md) · [Donate](#support)
+[Getting started](docs/getting-started.md) · [API guide](docs/api.md) · [Examples](examples/README.md) · [Creative gallery](docs/gallery.md) · [Architecture](docs/architecture.md) · [Donate](#support)
 
 ![A rotating mesh rendered by GlyphForge](docs/images/rotating_cube.gif)
 
@@ -115,7 +115,53 @@ python -m examples.obj_model
 python -m examples.hello_terminal
 ```
 
-All six demos accept `--output`, `--width`, `--height`, `--time`, `--fps`, and `--256`. See the [example guide](examples/README.md).
+All 18 demos accept `--output`, `--width`, `--height`, `--time`, `--fps`, and `--256`. See the [example guide](examples/README.md).
+
+## Project showcase: Glyph City
+
+[**Glyph City: Afterlight**](https://github.com/amirhdolati/glyph-city) is the flagship project behind this engine: a living terminal city with autonomous residents, furnished shop windows, changing weather, canal reflections, and an optional first-person walking mode.
+
+[![Glyph City — original City Watch GIF](https://raw.githubusercontent.com/amirhdolati/glyph-city/master/docs/media/city-watch.gif)](https://github.com/amirhdolati/glyph-city)
+
+This is the **original GIF from the Glyph City repository**, showing the canal and nighttime rain. GlyphForge extracts its rendering core into a standalone library; the existing game retains its own integrated renderer. This showcase demonstrates the source project's capabilities, not a claim that it has already migrated to the published package.
+
+[Explore Glyph City](https://github.com/amirhdolati/glyph-city) · [Original GIF](https://github.com/amirhdolati/glyph-city/blob/master/docs/media/city-watch.gif)
+
+## Twelve more creative directions
+
+The gallery now has **18 runnable examples**. Explore procedural light, mathematical art, instruments, particles, new environments, and animated mesh sculptures.
+
+| Aurora curtains | Neon wormhole |
+| --- | --- |
+| [![Aurora curtains](docs/images/aurora.png)](examples/aurora.py) | [![Neon wormhole](docs/images/wormhole.png)](examples/wormhole.py) |
+| `python -m examples.aurora` | `python -m examples.wormhole` |
+
+| Sunset ocean | Mandelbrot study |
+| --- | --- |
+| [![Sunset ocean](docs/images/sunset_ocean.png)](examples/sunset_ocean.py) | [![Mandelbrot study](docs/images/fractal_zoom.png)](examples/fractal_zoom.py) |
+| `python -m examples.sunset_ocean` | `python -m examples.fractal_zoom` |
+
+| Phosphor radar | Lava lamp |
+| --- | --- |
+| [![Phosphor radar](docs/images/radar_station.png)](examples/radar_station.py) | [![Lava lamp](docs/images/lava_lamp.png)](examples/lava_lamp.py) |
+| `python -m examples.radar_station` | `python -m examples.lava_lamp` |
+
+| Wave interference | Starflight |
+| --- | --- |
+| [![Wave interference](docs/images/wave_interference.png)](examples/wave_interference.py) | [![Starflight](docs/images/starflight.png)](examples/starflight.py) |
+| `python -m examples.wave_interference` | `python -m examples.starflight` |
+
+| Twilight canal | Fog monoliths |
+| --- | --- |
+| [![Twilight canal](docs/images/neon_canal.png)](examples/neon_canal.py) | [![Fog monoliths](docs/images/fog_monoliths.png)](examples/fog_monoliths.py) |
+| `python -m examples.neon_canal` | `python -m examples.fog_monoliths` |
+
+| Torus sculpture | Ripple terrain |
+| --- | --- |
+| [![Torus sculpture](docs/images/torus_sculpture.png)](examples/torus_sculpture.py) | [![Ripple terrain](docs/images/ripple_terrain.png)](examples/ripple_terrain.py) |
+| `python -m examples.torus_sculpture` | `python -m examples.ripple_terrain` |
+
+[Open the full gallery, animations, and source links →](docs/gallery.md)
 
 ## Development
 

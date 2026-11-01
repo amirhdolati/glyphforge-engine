@@ -7,14 +7,7 @@ from glyphforge import save_frame
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "docs/images"
-NAMES = (
-    "hello_terminal",
-    "raycast_street",
-    "sprite_garden",
-    "rotating_cube",
-    "obj_model",
-    "night_rain",
-)
+from examples.catalog import NAMES
 
 
 def raster(frame):
@@ -37,15 +30,23 @@ def main():
         save_frame(frame, OUT / (name + ".svg"))
         raster(frame).save(OUT / (name + ".png"))
         print(name)
-    module = importlib.import_module("examples.rotating_cube")
-    frames = [raster(module.frame(64, 24, index * 0.15)) for index in range(40)]
-    frames[0].save(
-        OUT / "rotating_cube.gif",
-        save_all=True,
-        append_images=frames[1:],
-        duration=100,
-        loop=0,
-    )
+    for name in (
+        "rotating_cube",
+        "wormhole",
+        "lava_lamp",
+        "starflight",
+        "torus_sculpture",
+    ):
+        module = importlib.import_module("examples." + name)
+        frames = [raster(module.frame(64, 24, index * 0.15)) for index in range(40)]
+        frames[0].save(
+            OUT / (name + ".gif"),
+            save_all=True,
+            append_images=frames[1:],
+            duration=100,
+            loop=0,
+        )
+        print(name + ".gif")
 
 
 if __name__ == "__main__":
