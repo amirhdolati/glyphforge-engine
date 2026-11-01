@@ -33,7 +33,11 @@ def main():
     OUT.mkdir(parents=True, exist_ok=True)
     for name in selected:
         module = importlib.import_module("examples." + name)
-        frame = module.frame(100, 36, 1)
+        frame = (
+            module.frame(160, 60, 1)
+            if name == "vaporwave"
+            else module.frame(100, 36, 1)
+        )
         save_frame(frame, OUT / (name + ".svg"))
         raster(frame).save(OUT / (name + ".png"))
         print(name)
@@ -56,7 +60,16 @@ def main():
             continue
         count = 64 if name in ("orbit_camera", "dolly_camera", "vaporwave") else 40
         frames = (
-            [raster(module.frame(80, 30, index * 0.15)) for index in range(count)]
+            [
+                raster(
+                    module.frame(
+                        120 if name == "vaporwave" else 80,
+                        45 if name == "vaporwave" else 30,
+                        index * 0.15,
+                    )
+                )
+                for index in range(count)
+            ]
             if count == 64
             else [raster(module.frame(64, 24, index * 0.15)) for index in range(count)]
         )

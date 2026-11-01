@@ -165,7 +165,7 @@ The original City Watch GIF above comes directly from the Glyph City repository 
 
 ## Vaporwave in 3D
 
-A striped sunset, triangulated wireframe mountains, stars, and a neon perspective grid come together in this animated 3D scene. The camera moves gently to reveal depth.
+A large striped sun rises and falls above blue wireframe mountains, stars, and a magenta perspective grid. A gently moving 3D camera and supersampled truecolor cells give this vaporwave landscape its depth and smooth gradients.
 
 ![Animated vaporwave horizon](docs/images/vaporwave.gif)
 
