@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Eight additional 3D object and structure demos, bringing the collection to 28.
+- Eight new PNG/SVG previews and four additional animations.
+- Selective gallery regeneration with `tools/render_gallery.py --only`.
+
 - Standalone engine introduction and focused rendering documentation.
 - World-to-view `look_at` helper with validated camera poses.
 - Stationary robot orbit and pillar dolly demos, animated previews, and camera tutorial.

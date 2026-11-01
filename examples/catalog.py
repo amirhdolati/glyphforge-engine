@@ -21,4 +21,12 @@ NAMES = (
     "ripple_terrain",
     "orbit_camera",
     "dolly_camera",
+    "spacecraft_flyby",
+    "castle_orbit",
+    "suspension_bridge",
+    "solar_orrery",
+    "spiral_staircase",
+    "molecule_orbit",
+    "crystal_cluster",
+    "kinetic_tower",
 )
