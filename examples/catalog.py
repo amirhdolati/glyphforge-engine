@@ -19,4 +19,6 @@ NAMES = (
     "fog_monoliths",
     "torus_sculpture",
     "ripple_terrain",
+    "orbit_camera",
+    "dolly_camera",
 )

@@ -79,3 +79,41 @@ class MeshEngine(_Engine):
 
 
 __all__ = ["MeshEngine", "matrix"]
+
+
+def look_at(eye, target, up=(0.0, 1.0, 0.0)):
+    """Return a left-handed world-to-view matrix for a camera at eye.
+
+    The camera looks along +Z toward target. up defines the vertical direction;
+    it must not be parallel to the viewing direction. Inputs are finite triples.
+    """
+    if any(
+        len(v) != 3 or not all(math.isfinite(c) for c in v) for v in (eye, target, up)
+    ):
+        raise ValueError("eye, target and up must be finite XYZ triples")
+
+    def unit(v):
+        length = math.sqrt(sum(c * c for c in v))
+        if length < 1e-12:
+            raise ValueError(
+                "Camera direction and up must define distinct, nonparallel axes"
+            )
+        return tuple(c / length for c in v)
+
+    def cross(a, b):
+        return (
+            a[1] * b[2] - a[2] * b[1],
+            a[2] * b[0] - a[0] * b[2],
+            a[0] * b[1] - a[1] * b[0],
+        )
+
+    forward = unit(tuple(t - e for t, e in zip(target, eye)))
+    right = unit(cross(unit(up), forward))
+    vertical = cross(forward, right)
+    return tuple(
+        tuple(axis) + (-sum(a * e for a, e in zip(axis, eye)),)
+        for axis in (right, vertical, forward)
+    ) + ((0.0, 0.0, 0.0, 1.0),)
+
+
+__all__.append("look_at")

@@ -1,6 +1,6 @@
 # Creative example gallery
 
-Eighteen runnable examples explore three routes into GlyphForge: authored grid scenes, triangle meshes, and custom cell renderers. The procedural examples implement their own visual effects and use the engine for cell validation, terminal presentation, and export; these are not additional built-in 3D backends.
+Twenty runnable examples explore three routes into GlyphForge: authored grid scenes, triangle meshes, and custom cell renderers. The procedural examples implement their own visual effects and use the engine for cell validation, terminal presentation, and export; these are not additional built-in 3D backends.
 
 Run from the repository root after `python -m pip install -e .`. Every image below is generated from the corresponding example at 100 × 36 cells and time 1.0. Use `--output output/name.html` for a headless preview.
 
@@ -180,6 +180,32 @@ Four of the new demos also have reproducible animated previews. GIF uses a reduc
 
 ![Animated torus_sculpture](images/torus_sculpture.gif)
 
+## Moving cameras around real 3D geometry
+
+The following scenes keep every mesh fixed in world coordinates. Only the camera moves.
+
+### Robot orbit
+
+![Camera orbiting a robot sculpture](images/orbit_camera.gif)
+
+```sh
+python -m examples.orbit_camera
+```
+
+[Source](../examples/orbit_camera.py) · [Still image](images/orbit_camera.png) · [Vector preview](images/orbit_camera.svg)
+
+### Dolly through pillars
+
+![Dolly camera and depth occlusion](images/dolly_camera.gif)
+
+```sh
+python -m examples.dolly_camera
+```
+
+[Source](../examples/dolly_camera.py) · [Still image](images/dolly_camera.png) · [Vector preview](images/dolly_camera.svg)
+
+[Learn how the camera transforms work](cameras.md).
+
 ## Original examples
 
 The original six demos remain available: [character waves](../examples/hello_terminal.py), [daylight street](../examples/raycast_street.py), [rainy night](../examples/night_rain.py), [sprite garden](../examples/sprite_garden.py), [rotating cube](../examples/rotating_cube.py), and [OBJ model](../examples/obj_model.py).
@@ -191,4 +217,4 @@ python -m pip install Pillow
 PYTHONPATH=src:. python tools/render_gallery.py
 ```
 
-The tool generates 18 PNGs, 18 SVGs and five GIFs from actual frames. The Glyph City showcase uses its upstream GIF directly and is not regenerated here.
+The tool generates 20 PNGs, 20 SVGs and seven GIFs from actual frames. The Glyph City showcase uses its upstream GIF directly and is not regenerated here.

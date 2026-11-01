@@ -34,7 +34,7 @@ Tiles: `r` road, `p` paving, `g` grass, `b` bridge, `w` water. Direct tile and g
 
 ### Camera and environment
 
-`View(scene, x=2.5, y=2.5, angle=0, ...)` holds one render snapshot. The scene is exposed as `view.city` for compatibility with the extracted renderer.
+`View(scene, x=2.5, y=2.5, angle=0, ...)` holds one render snapshot. Access its scene through `view.city`.
 
 | Field | Units / contract |
 | --- | --- |
@@ -103,6 +103,10 @@ Each art entry is `(tuple_of_ASCII_rows, world_width, world_height)`. Use non-em
 OBJ faces must already be triangulated and use positive one-based vertex indices. Provide `mtllib`, `usemtl`, and matching `Kd` diffuse colors. Textures, normals, UVs, negative indices, arbitrary polygons and material effects are not supported. The JSON colormap keys are lowercase six-digit RGB hex. An empty mapped value means transparency; otherwise the inherited loader uses its first character. Use printable ASCII.
 
 PPM input is text P3 with RGB samples in 0–255 and maximum value 255. The loader does not decode binary P6. Assets should be trusted project files; this loader is not a hardened arbitrary-file parser.
+
+### Camera positioning
+
+`glyphforge.mesh.look_at(eye, target, up=(0, 1, 0))` builds the world-to-view matrix for a camera at `eye` looking toward `target`. Inputs are finite XYZ triples; eye and target must differ, and up must not be parallel to the view direction. Pass it to `camera.set_transformation(...)`. Moving the camera leaves model transforms unchanged. See [camera examples](cameras.md) for orbiting and dolly motion.
 
 ## ANSI and terminal transport
 
