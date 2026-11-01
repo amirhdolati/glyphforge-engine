@@ -62,7 +62,7 @@ def segment(buf, a, b, color, char=None):
             if (x1 - x0) * (y1 - y0) < 0
             else "\\"
         )
-        plot(buf, x, y, glyph, color, mix(color, (9, 8, 32), 0.35))
+        plot(buf, x, y, glyph, color)
 
 
 def fill_polygon(buf, points, color, seed=0):
@@ -85,7 +85,7 @@ def fill_polygon(buf, points, color, seed=0):
                 bg = mix(color, (7, 7, 27), shade)
                 fleck = (x * 17 + y * 31 + seed) % 67 == 0
                 plot(
-                    buf, x, y, "." if fleck else " ", mix(bg, (100, 102, 191), 0.5), bg
+                    buf, x, y, "." if fleck else " ", mix(bg, (100, 102, 191), 0.5), SKY_TOP
                 )
 
 
@@ -183,7 +183,7 @@ def render_scene(width, height, seconds):
                 0.13 + 0.09 * math.sin(x * 0.12)
             )
             sky = mix(base, (135, 31, 139), haze)
-            row.append((" ", sky, sky))
+            row.append((" ", sky, SKY_TOP))
         buf.append(row)
 
     for i in range(max(34, width * height // 180)):
@@ -191,7 +191,7 @@ def render_scene(width, height, seconds):
         y = (i * 3571 + 5) % max(1, int(height * 0.55))
         twinkle = 0.48 + 0.52 * math.sin(seconds * math.tau / 9.6 + i * 2.17)
         color = mix((92, 94, 173), (245, 218, 255), twinkle)
-        plot(buf, x, y, ".", color, mix(color, buf[y][x][2], 0.45))
+        plot(buf, x, y, "." if i % 7 else "+", color)
 
     # Subtle distant grid and horizon glow sit behind both mountain ridges.
     draw_grid(buf, view, width, height, fov, 9.5, 58, foreground=False)
@@ -241,7 +241,7 @@ def render_scene(width, height, seconds):
                     continue
                 bg = sun
                 bg = mix(bg, (255, 225, 204), halo * 0.18)
-                plot(buf, x, y, " ", sun, bg)
+                plot(buf, x, y, "@#*+="[min(4, int((dy + 1) * 2.5))], sun)
 
     # The far ridge fades into the glow; the nearer ridge carries the sharp lattice.
     far = mountain(17.0, 36.0, 23, 1.1, 2.0)
@@ -265,30 +265,8 @@ def render_scene(width, height, seconds):
 
 
 def frame(width, height, seconds):
-    """Supersample the procedural 3D scene into RGB terminal backgrounds."""
-    scale = 3
-    source = render_scene(width * scale, height * scale, seconds)
-    return [
-        [
-            (
-                " ",
-                (255, 255, 255),
-                tuple(
-                    round(
-                        sum(
-                            source[y * scale + dy][x * scale + dx][2][c]
-                            for dy in range(scale)
-                            for dx in range(scale)
-                        )
-                        / scale**2
-                    )
-                    for c in range(3)
-                ),
-            )
-            for x in range(width)
-        ]
-        for y in range(height)
-    ]
+    """Render printable ASCII with foreground colors on a uniform dark canvas."""
+    return render_scene(width, height, seconds)
 
 
 if __name__ == "__main__":

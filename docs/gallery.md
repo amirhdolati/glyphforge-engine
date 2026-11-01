@@ -337,7 +337,7 @@ The tool generates 29 PNGs, 29 SVGs and twelve GIFs from actual frames. The Glyp
 
 ## Vaporwave horizon
 
-**Procedural 3D wireframe scene.** A large striped sun rises and falls over layered blue mountain lattices. World-space vertices use perspective projection and a moving camera; supersampling converts the scene to truecolor terminal backgrounds. The sun and camera repeat every 9.6 seconds. PNG, SVG, and GIF previews are generated from the same runnable example.
+**Procedural 3D wireframe scene.** A large striped sun rises and falls over layered blue mountain lattices. World-space vertices use perspective projection and a moving camera; printable ASCII glyphs draw the scene on a uniform dark background. The sun and camera repeat every 9.6 seconds. PNG, SVG, and GIF previews are generated from the same runnable example.
 
 ![Vaporwave sunset, wireframe mountains and perspective grid](images/vaporwave.png)
 
