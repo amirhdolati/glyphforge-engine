@@ -151,7 +151,7 @@ python -m examples.obj_model
 python -m examples.hello_terminal
 ```
 
-All 28 demos accept `--output`, `--width`, `--height`, `--time`, `--fps`, and `--256`. See the [example guide](examples/README.md).
+All 29 demos accept `--output`, `--width`, `--height`, `--time`, `--fps`, and `--256`. See the [example guide](examples/README.md).
 
 ## Project showcase: Glyph City
 
@@ -163,9 +163,21 @@ The original City Watch GIF above comes directly from the Glyph City repository 
 
 [Explore Glyph City](https://github.com/amirhdolati/glyph-city) · [Original GIF](https://github.com/amirhdolati/glyph-city/blob/master/docs/media/city-watch.gif)
 
+## Vaporwave in 3D
+
+A striped sunset, triangulated wireframe mountains, stars, and a neon perspective grid come together in this animated 3D scene. The camera moves gently to reveal depth.
+
+![Animated vaporwave horizon](docs/images/vaporwave.gif)
+
+```sh
+python -m examples.vaporwave
+```
+
+[Full still, animation, and source](docs/gallery.md#vaporwave-horizon)
+
 ## Twelve more creative directions
 
-The gallery now has **28 runnable examples**. Explore procedural light, mathematical art, instruments, particles, new environments, and animated mesh sculptures.
+The gallery now has **29 runnable examples**. Explore procedural light, mathematical art, instruments, particles, new environments, and animated mesh sculptures.
 
 | Aurora curtains | Neon wormhole |
 | --- | --- |

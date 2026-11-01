@@ -29,4 +29,5 @@ NAMES = (
     "molecule_orbit",
     "crystal_cluster",
     "kinetic_tower",
+    "vaporwave",
 )

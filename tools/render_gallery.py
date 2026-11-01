@@ -49,6 +49,7 @@ def main():
         "suspension_bridge",
         "solar_orrery",
         "kinetic_tower",
+        "vaporwave",
     ):
         module = importlib.import_module("examples." + name)
         if name not in selected:

@@ -1,6 +1,6 @@
 # Creative example gallery
 
-Twenty-eight runnable examples explore three routes into GlyphForge: authored grid scenes, triangle meshes, and custom cell renderers. The procedural examples implement their own visual effects and use the engine for cell validation, terminal presentation, and export; these are not additional built-in 3D backends.
+Twenty-nine runnable examples explore three routes into GlyphForge: authored grid scenes, triangle meshes, and custom cell renderers. The procedural examples implement their own visual effects and use the engine for cell validation, terminal presentation, and export; these are not additional built-in 3D backends.
 
 Run from the repository root after `python -m pip install -e .`. Every image below is generated from the corresponding example at 100 × 36 cells and time 1.0. Use `--output output/name.html` for a headless preview.
 
@@ -333,4 +333,19 @@ python -m pip install Pillow
 PYTHONPATH=src:. python tools/render_gallery.py
 ```
 
-The tool generates 28 PNGs, 28 SVGs and eleven GIFs from actual frames. The Glyph City showcase uses its upstream GIF directly and is not regenerated here.
+The tool generates 29 PNGs, 29 SVGs and twelve GIFs from actual frames. The Glyph City showcase uses its upstream GIF directly and is not regenerated here.
+
+## Vaporwave horizon
+
+**3D triangle scene.** A horizontally striped sunset sits behind a triangulated wireframe mountain range. A neon floor grid converges toward the horizon while the camera glides gently from side to side.
+
+![Vaporwave sunset, wireframe mountains and perspective grid](images/vaporwave.png)
+
+```sh
+python -m examples.vaporwave
+python -m examples.vaporwave --output output/vaporwave.html
+```
+
+![Animated vaporwave 3D scene](images/vaporwave.gif)
+
+[Source](../examples/vaporwave.py) · [SVG preview](images/vaporwave.svg)
