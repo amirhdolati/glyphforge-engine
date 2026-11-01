@@ -149,7 +149,7 @@ python -m examples.obj_model
 python -m examples.hello_terminal
 ```
 
-All 20 demos accept `--output`, `--width`, `--height`, `--time`, `--fps`, and `--256`. See the [example guide](examples/README.md).
+All 28 demos accept `--output`, `--width`, `--height`, `--time`, `--fps`, and `--256`. See the [example guide](examples/README.md).
 
 ## Project showcase: Glyph City
 
@@ -163,7 +163,7 @@ The original City Watch GIF above comes directly from the Glyph City repository 
 
 ## Twelve more creative directions
 
-The gallery now has **20 runnable examples**. Explore procedural light, mathematical art, instruments, particles, new environments, and animated mesh sculptures.
+The gallery now has **28 runnable examples**. Explore procedural light, mathematical art, instruments, particles, new environments, and animated mesh sculptures.
 
 | Aurora curtains | Neon wormhole |
 | --- | --- |
@@ -196,6 +196,32 @@ The gallery now has **20 runnable examples**. Explore procedural light, mathemat
 | `python -m examples.torus_sculpture` | `python -m examples.ripple_terrain` |
 
 [Open the full gallery, animations, and source links →](docs/gallery.md)
+
+## More 3D objects to explore
+
+Spacecraft, architecture, orbital motion, crystal forms and kinetic sculpture—all rendered from triangle meshes with moving cameras.
+
+| Spacecraft flyby | Castle courtyard |
+| --- | --- |
+| [![Spacecraft flyby](docs/images/spacecraft_flyby.png)](examples/spacecraft_flyby.py) | [![Castle courtyard](docs/images/castle_orbit.png)](examples/castle_orbit.py) |
+| `python -m examples.spacecraft_flyby` | `python -m examples.castle_orbit` |
+
+| Suspension bridge | Solar orrery |
+| --- | --- |
+| [![Suspension bridge](docs/images/suspension_bridge.png)](examples/suspension_bridge.py) | [![Solar orrery](docs/images/solar_orrery.png)](examples/solar_orrery.py) |
+| `python -m examples.suspension_bridge` | `python -m examples.solar_orrery` |
+
+| Spiral staircase | Tetrahedral sculpture |
+| --- | --- |
+| [![Spiral staircase](docs/images/spiral_staircase.png)](examples/spiral_staircase.py) | [![Tetrahedral sculpture](docs/images/molecule_orbit.png)](examples/molecule_orbit.py) |
+| `python -m examples.spiral_staircase` | `python -m examples.molecule_orbit` |
+
+| Crystal cluster | Kinetic tower |
+| --- | --- |
+| [![Crystal cluster](docs/images/crystal_cluster.png)](examples/crystal_cluster.py) | [![Kinetic tower](docs/images/kinetic_tower.png)](examples/kinetic_tower.py) |
+| `python -m examples.crystal_cluster` | `python -m examples.kinetic_tower` |
+
+[Full 3D gallery with animations and source links](docs/gallery.md#more-3d-objects-and-structures)
 
 ## Development
 

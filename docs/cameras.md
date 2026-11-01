@@ -79,3 +79,7 @@ This moves the eye sideways and forward/back while keeping a fixed target. Nearb
 The mesh camera's `fov` is in radians. Its `ratio` is the viewport's physical width/height; for cells with width/height 0.5, use `columns * 0.5 / rows`. Near and far clipping bounds must satisfy `0 < near < far`.
 
 The separate grid backend uses `View.x`, `View.y`, and `View.angle` on an XY ground plane. These are different coordinate conventions; `look_at` is for `MeshEngine` cameras.
+
+## More scenes using the same camera pattern
+
+The [3D collection](gallery.md#more-3d-objects-and-structures) adds a spacecraft, castle, suspension bridge, orrery, staircase, tetrahedral sculpture, crystals and a kinetic tower. Each uses `look_at` for a camera orbit. The orrery also moves its planets, and the kinetic tower rotates its slabs independently.

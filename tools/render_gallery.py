@@ -1,5 +1,6 @@
 """Generate documentation images from actual engine frames (Pillow required)."""
 
+import argparse
 import importlib
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
@@ -23,8 +24,14 @@ def raster(frame):
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--only", nargs="+", choices=NAMES, help="Regenerate selected examples"
+    )
+    args = parser.parse_args()
+    selected = args.only or NAMES
     OUT.mkdir(parents=True, exist_ok=True)
-    for name in NAMES:
+    for name in selected:
         module = importlib.import_module("examples." + name)
         frame = module.frame(100, 36, 1)
         save_frame(frame, OUT / (name + ".svg"))
@@ -38,8 +45,14 @@ def main():
         "torus_sculpture",
         "orbit_camera",
         "dolly_camera",
+        "spacecraft_flyby",
+        "suspension_bridge",
+        "solar_orrery",
+        "kinetic_tower",
     ):
         module = importlib.import_module("examples." + name)
+        if name not in selected:
+            continue
         count = 64 if name in ("orbit_camera", "dolly_camera") else 40
         frames = (
             [raster(module.frame(80, 30, index * 0.15)) for index in range(count)]

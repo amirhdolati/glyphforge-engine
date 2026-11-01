@@ -1,6 +1,6 @@
 # Creative example gallery
 
-Twenty runnable examples explore three routes into GlyphForge: authored grid scenes, triangle meshes, and custom cell renderers. The procedural examples implement their own visual effects and use the engine for cell validation, terminal presentation, and export; these are not additional built-in 3D backends.
+Twenty-eight runnable examples explore three routes into GlyphForge: authored grid scenes, triangle meshes, and custom cell renderers. The procedural examples implement their own visual effects and use the engine for cell validation, terminal presentation, and export; these are not additional built-in 3D backends.
 
 Run from the repository root after `python -m pip install -e .`. Every image below is generated from the corresponding example at 100 × 36 cells and time 1.0. Use `--output output/name.html` for a headless preview.
 
@@ -206,6 +206,122 @@ python -m examples.dolly_camera
 
 [Learn how the camera transforms work](cameras.md).
 
+## More 3D objects and structures
+
+Eight additional mesh studies use real triangle geometry and a moving camera. Run each from the repository root; every command also accepts `--output`, `--time`, and the standard size options.
+
+### Spacecraft flyby
+
+A low-poly spacecraft with swept wings, a raised cockpit, tail fins and engine details. The camera orbits the stationary mesh.
+
+![Spacecraft flyby](images/spacecraft_flyby.png)
+
+```sh
+python -m examples.spacecraft_flyby
+python -m examples.spacecraft_flyby --output output/spacecraft_flyby.html
+```
+
+[Source](../examples/spacecraft_flyby.py) · [SVG](images/spacecraft_flyby.svg)
+
+![Animated Spacecraft flyby](images/spacecraft_flyby.gif)
+
+### Castle courtyard
+
+Four crenellated towers frame a courtyard and an open gateway. Moving viewpoints expose the walls, entrance and interior.
+
+![Castle courtyard](images/castle_orbit.png)
+
+```sh
+python -m examples.castle_orbit
+python -m examples.castle_orbit --output output/castle_orbit.html
+```
+
+[Source](../examples/castle_orbit.py) · [SVG](images/castle_orbit.svg)
+
+### Suspension bridge
+
+A deck, paired towers, suspension cables and vertical hangers form a small bridge viewed from a moving camera.
+
+![Suspension bridge](images/suspension_bridge.png)
+
+```sh
+python -m examples.suspension_bridge
+python -m examples.suspension_bridge --output output/suspension_bridge.html
+```
+
+[Source](../examples/suspension_bridge.py) · [SVG](images/suspension_bridge.svg)
+
+![Animated Suspension bridge](images/suspension_bridge.gif)
+
+### Solar orrery
+
+Three faceted planets travel along visible orbital rings around a central sun. Object motion and camera motion run independently; this is an artistic model, not a scale-accurate simulation.
+
+![Solar orrery](images/solar_orrery.png)
+
+```sh
+python -m examples.solar_orrery
+python -m examples.solar_orrery --output output/solar_orrery.html
+```
+
+[Source](../examples/solar_orrery.py) · [SVG](images/solar_orrery.svg)
+
+![Animated Solar orrery](images/solar_orrery.gif)
+
+### Spiral staircase
+
+Sixteen steps wrap around a central column. Each step has its own translation and rotation, with outer handrail posts.
+
+![Spiral staircase](images/spiral_staircase.png)
+
+```sh
+python -m examples.spiral_staircase
+python -m examples.spiral_staircase --output output/spiral_staircase.html
+```
+
+[Source](../examples/spiral_staircase.py) · [SVG](images/spiral_staircase.svg)
+
+### Tetrahedral sculpture
+
+A central octahedron connects to four outer shapes with solid bonds. This molecular-style sculpture is a geometry study, not a chemical simulation.
+
+![Tetrahedral sculpture](images/molecule_orbit.png)
+
+```sh
+python -m examples.molecule_orbit
+python -m examples.molecule_orbit --output output/molecule_orbit.html
+```
+
+[Source](../examples/molecule_orbit.py) · [SVG](images/molecule_orbit.svg)
+
+### Crystal cluster
+
+Seven hexagonal prisms rise to faceted tips, with a taller central crystal and smaller surrounding forms.
+
+![Crystal cluster](images/crystal_cluster.png)
+
+```sh
+python -m examples.crystal_cluster
+python -m examples.crystal_cluster --output output/crystal_cluster.html
+```
+
+[Source](../examples/crystal_cluster.py) · [SVG](images/crystal_cluster.svg)
+
+### Kinetic tower
+
+Nine square slabs twist at different angles while the camera circles the stack. The geometry demonstrates independent model and camera transforms.
+
+![Kinetic tower](images/kinetic_tower.png)
+
+```sh
+python -m examples.kinetic_tower
+python -m examples.kinetic_tower --output output/kinetic_tower.html
+```
+
+[Source](../examples/kinetic_tower.py) · [SVG](images/kinetic_tower.svg)
+
+![Animated Kinetic tower](images/kinetic_tower.gif)
+
 ## Original examples
 
 The original six demos remain available: [character waves](../examples/hello_terminal.py), [daylight street](../examples/raycast_street.py), [rainy night](../examples/night_rain.py), [sprite garden](../examples/sprite_garden.py), [rotating cube](../examples/rotating_cube.py), and [OBJ model](../examples/obj_model.py).
@@ -217,4 +333,4 @@ python -m pip install Pillow
 PYTHONPATH=src:. python tools/render_gallery.py
 ```
 
-The tool generates 20 PNGs, 20 SVGs and seven GIFs from actual frames. The Glyph City showcase uses its upstream GIF directly and is not regenerated here.
+The tool generates 28 PNGs, 28 SVGs and eleven GIFs from actual frames. The Glyph City showcase uses its upstream GIF directly and is not regenerated here.
