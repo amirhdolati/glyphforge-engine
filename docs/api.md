@@ -20,6 +20,24 @@ Each character must be printable single-column ASCII, from space through `~`; ea
 
 SVG text uses the viewer's monospace font, so glyph appearance can vary. PNG/GIF generation is a documentation tool rather than a runtime dependency.
 
+## Convert an RGB image to ASCII
+
+`raster_to_ascii(pixels, source_width, source_height, columns=..., rows=...)`
+accepts a row-major sequence of packed `0xRRGGBB` integers. It samples four
+pixels per output cell and maps their brightness to printable ASCII. The
+returned frame uses fixed white foreground and black background.
+
+```python
+from glyphforge import raster_to_ascii, to_text
+
+pixels = [0x000000, 0x555555, 0xAAAAAA, 0xFFFFFF]
+frame = raster_to_ascii(pixels, 4, 1, columns=4, rows=1)
+print(to_text(frame))
+```
+
+Use `Terminal.draw_ascii(frame)` to display the characters in the terminal's
+default colors. Use `save_frame(frame, "image.svg")` to export them.
+
 ## Grid ray caster
 
 ### Scene and geometry

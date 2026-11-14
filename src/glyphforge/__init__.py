@@ -4,6 +4,7 @@ from .scene import Building, Scene, Sprite, View
 from .raycast import Renderer
 from .mesh import MeshEngine
 from .terminal import Terminal
+from .raster import raster_to_ascii
 from .frame import from_text, save_frame, to_html, to_svg, to_text
 
 __version__ = "0.1.0"
@@ -16,6 +17,7 @@ __all__ = [
     "MeshEngine",
     "Terminal",
     "from_text",
+    "raster_to_ascii",
     "save_frame",
     "to_html",
     "to_svg",

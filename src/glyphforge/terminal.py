@@ -4,7 +4,7 @@ import os
 import select
 import signal
 import sys
-from .ansi import FrameSnapshot, encode
+from .ansi import FrameSnapshot, encode, encode_ascii
 from .input import Input, Event
 
 
@@ -128,4 +128,10 @@ class Terminal:
             self.frame_snapshot.config = (bool(self.truecolor), x, y)
             self.frame_snapshot.force_full = False
         sys.stdout.write("\x1b[?2026h" + payload + "\x1b[?2026l")
+        sys.stdout.flush()
+
+    def draw_ascii(self, frame, x=1, y=1):
+        """Draw a full character frame with the terminal's default colors."""
+        self.frame_snapshot.invalidate()
+        sys.stdout.write("\x1b[?2026h\x1b[0m" + encode_ascii(frame, x, y) + "\x1b[?2026l")
         sys.stdout.flush()

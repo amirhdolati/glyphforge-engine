@@ -47,6 +47,14 @@ def encode(buf, truecolor=True, x=1, y=1):
     return "".join(parts)
 
 
+def encode_ascii(frame, x=1, y=1):
+    """Position glyph rows using the terminal's default colors."""
+    return "".join(
+        f"\x1b[{y + offset};{x}H" + "".join(cell[0] for cell in row)
+        for offset, row in enumerate(frame)
+    )
+
+
 def dirty_rows(previous, current):
     """Return row indices whose terminal cells changed.
 
