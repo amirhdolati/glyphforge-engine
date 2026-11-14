@@ -1,8 +1,8 @@
 """Convert RGB rasters to monochrome character frames."""
 
-ASCII_RAMP = " .,:;-~=+*oO#%@"
+ASCII_RAMP = " .'`,:;il!>~+_-?][}{1)(|tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$"
 _ASCII_GLYPHS = tuple(
-    ASCII_RAMP[round((level / 255) ** 0.65 * (len(ASCII_RAMP) - 1))]
+    ASCII_RAMP[round((level / 255) ** 1.1 * (len(ASCII_RAMP) - 1))]
     for level in range(256)
 )
 _FOREGROUND = (255, 255, 255)
@@ -44,6 +44,23 @@ def raster_to_ascii(pixels, source_width, source_height, *, columns, rows):
             g = sum((pixel >> 8) & 255 for pixel in samples) // 4
             b = sum(pixel & 255 for pixel in samples) // 4
             luminance = (54 * r + 183 * g + 19 * b) >> 8
-            row.append((_ASCII_GLYPHS[luminance], _FOREGROUND, _BACKGROUND))
+            # Preserve strong contours that disappear when averaging a cell.
+            levels = [
+                (54 * ((pixel >> 16) & 255) + 183 * ((pixel >> 8) & 255)
+                 + 19 * (pixel & 255)) >> 8
+                for pixel in samples
+            ]
+            a, b, c, d = levels
+            horizontal = (b + d - a - c) / 2
+            vertical = (c + d - a - b) / 2
+            glyph = _ASCII_GLYPHS[luminance]
+            if max(levels) - min(levels) >= 42:
+                if abs(horizontal) > 2 * abs(vertical):
+                    glyph = "|"
+                elif abs(vertical) > 2 * abs(horizontal):
+                    glyph = "-"
+                elif abs(horizontal) + abs(vertical) >= 42:
+                    glyph = "/" if horizontal * vertical > 0 else "\\"
+            row.append((glyph, _FOREGROUND, _BACKGROUND))
         frame.append(row)
     return frame

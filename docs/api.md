@@ -24,7 +24,8 @@ SVG text uses the viewer's monospace font, so glyph appearance can vary. PNG/GIF
 
 `raster_to_ascii(pixels, source_width, source_height, columns=..., rows=...)`
 accepts a row-major sequence of packed `0xRRGGBB` integers. It samples four
-pixels per output cell and maps their brightness to printable ASCII. The
+pixels per output cell and maps their brightness to a 64-character ASCII ramp.
+Strong contours use directional characters to preserve edges within a cell. The
 returned frame uses fixed white foreground and black background.
 
 ```python
