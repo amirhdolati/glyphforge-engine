@@ -20,27 +20,27 @@ Keep `_vendor` changes narrow and explain their upstream impact. Open an issue w
 
 ## Commit messages and documentation
 
-Use [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/):
+Use [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/).
+Write each subject in English, start the summary with a verb, and aim for
+72 characters or fewer. Use `type: summary` or `type(scope): summary`.
 
 | Type | Use for |
 | --- | --- |
-| `feat` | New user-facing capability |
-| `fix` | Bug fix |
-| `docs` | Documentation only |
-| `build` | Build system, dependencies, packaging |
-| `refactor` | Code change that is neither feat nor fix |
-| `test` | Tests only |
-| `chore` | Maintenance that does not change product behavior |
+| `feat` | New functionality |
+| `fix` | Bug fixes |
+| `docs` | Documentation |
+| `build` | Build tools, dependencies, and packaging |
+| `ci` | CI configuration and workflows |
+| `refactor` | Code changes that preserve behavior |
+| `perf` | Performance improvements |
+| `test` | Tests |
+| `chore` | Other project maintenance |
 
-Format: `<type>(optional-scope): <imperative summary>`
+For example, use `docs: clarify the quick start` or
+`fix(terminal): restore the cursor on exit`. Mark breaking changes with
+`!` before the colon or a `BREAKING CHANGE:` footer.
 
-Examples:
-
-- `feat(camera): add dolly path helpers for mesh demos`
-- `fix(terminal): restore the alternate screen after SIGINT`
-- `docs: document moving cameras and gallery exports`
-
-Keep the subject under ~72 characters, use the imperative mood, and write in English.
-
-All project documentation (`README`, `docs/`, `CONTRIBUTING`, examples READMEs, and contributor-facing comments) must be in English. Do not add localized documentation files.
-
+Write project documentation in English. Use the README for the project
+overview, prerequisites, and quick start. Link to the relevant guides from
+the README and put longer guides in `docs/`. Use descriptive headings,
+relative links for repository files, and alt text for screenshots.
