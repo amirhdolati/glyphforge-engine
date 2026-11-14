@@ -28,7 +28,7 @@ GlyphForge is a terminal rendering engine for 3D objects, atmospheric scenes, an
 
 The grid renderer uses a 2.5D world of axis-aligned footprints and upright sprites. The mesh renderer supports actual 3D triangle geometry and maps material colors to characters. These are two distinct backends sharing a terminal cell format.
 
-## Install and run
+## Quick start
 
 ```sh
 git clone https://github.com/amirhdolati/glyphforge-engine.git
@@ -260,6 +260,10 @@ The inherited OBJ loader expects triangulated faces and a material library with 
 ## Attribution
 
 The triangle backend includes MIT-licensed RendASCII code by **Garrett Russell Fairburn**, copyright 2018–2020. Its original copyright and license are preserved in the package. See [third-party notices](THIRD_PARTY_NOTICES.md).
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for setup, Conventional Commits, and English-only documentation rules.
 
 ## Support
 
